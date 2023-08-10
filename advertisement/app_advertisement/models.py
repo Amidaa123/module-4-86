@@ -25,7 +25,14 @@ class Advertisement(models.Model):
         auto_now_add=True,
         verbose_name="Дата публикации"
     )
+
     updated_at = models.DateTimeField(
         auto_now=True,
         verbose_name="Дата редактирования"
     )
+
+    def __str__(self):
+        return f"id= {self.id} title = {self.title} price = {self.price}"
+
+    class Meta:
+        db_table = "advertisement"
