@@ -43,7 +43,9 @@ class Advertisement(models.Model):
 
     image = models.ImageField(
         verbose_name="Изображение",
-        upload_to="advertisements/"
+        upload_to="advertisements/",
+        null = True,
+        blank = True
     )
 
     @admin.display(description="Дата создания")
@@ -63,6 +65,17 @@ class Advertisement(models.Model):
                 '<span style="color: blue; font-weight: bold;">Сегодня в {}</span>', updated_time
             )
         return self.updated_at.strftime("%d.%m.%Y | %H:%M:%S")
+
+    @admin.display(description="фото")
+    def show_photo(self):
+        if self.image:
+            return format_html(
+                '<img src={} width=200 height=200>', self.image.url
+            )
+        else:
+            return format_html(
+                '<span style="color: red;">Нет фото</span>'
+            )
     def __str__(self):
         return f"id = {self.id} title = {self.title} price = {self.price}"
 
