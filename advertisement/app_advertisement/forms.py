@@ -35,6 +35,6 @@ class AdvertisementForm(models.ModelForm):
 
     def clean_title(self):
         title = self.cleaned_data.get('title')
-        if title and title.sterswith('?'):
+        if title and title.startswith('?'):
             raise ValidationError("Ошибка")
         return title
