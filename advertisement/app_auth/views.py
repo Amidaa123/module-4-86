@@ -33,7 +33,7 @@ def register_view(request):
     if request.method == "POST":
         form = CreateUserForm(request.POST)
         if form.is_valid():
-            advertisement = form.save()
+            user = form.save()
             url = reverse('profile')
             return redirect(url)
     else:
